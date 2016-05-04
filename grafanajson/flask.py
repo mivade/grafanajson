@@ -1,8 +1,7 @@
 """Provides a Flask blueprint for defining Grafana endpoints."""
 
 from __future__ import absolute_import
-import json
-from flask import Blueprint, jsonify
+from flask import Blueprint, json, Response
 
 
 def make_blueprint(resource):
@@ -20,10 +19,12 @@ def make_blueprint(resource):
 
     @grafana.route('/query')
     def query():
-        return jsonify(resource.query('abc'))
+        data = json.dumps(resource.query('abc'))
+        return Response(data, mimetype='application/json')
 
     @grafana.route('/search')
     def search():
-        return jsonify(resource.search())
+        data = json.dumps(resource.search())
+        return Response(data, mimetype='application/json')
 
     return grafana

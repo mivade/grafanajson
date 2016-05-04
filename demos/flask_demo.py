@@ -10,7 +10,7 @@ class TestResource(Resource):
             q = json.loads(body)
         except ValueError:
             raise ValueError('body must be JSON-decodable')
-        result = jsonify([
+        result = [
             {
                 "target": "upper_75",
                 "datapoints": [[622, 1450754160000], [365, 1450754220000]]
@@ -19,7 +19,7 @@ class TestResource(Resource):
                 "target": "upper_90",
                 "datapoints": [[861, 1450754160000], [767, 1450754220000]]
             }
-        ])
+        ]
         return result
 
 app = Flask(__name__)
